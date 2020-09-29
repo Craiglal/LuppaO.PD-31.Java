@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -40,5 +42,21 @@ public class Main {
         }
 
         System.out.println("Avg = " + sum / counter);
+        System.out.println();
+
+        String str = "sjdhgfsjkavchjwagehf";
+        Pattern pattern = Pattern.compile("[h-tH-T]", Pattern.CASE_INSENSITIVE);
+        String result = "";
+        for (int i = 0; i < str.length(); i++){
+            Matcher matcher = pattern.matcher(str.substring(i,i + 1));
+            if(matcher.find()){
+                result += str.substring(i,i + 1).toUpperCase();
+            }
+            else{
+                result += str.substring(i,i + 1);
+            }
+        }
+        System.out.println(result);
+        System.out.println();
     }
 }
