@@ -15,6 +15,36 @@ public class Main {
         for(int i = 0; i < arr.length; i++){
             System.out.println(arr[i]);
         }
+
+        boolean run = true;
+        while(run){
+            System.out.println("Choose option:");
+            System.out.println("1) Input new value");
+            System.out.println("2) Output the row");
+            System.out.println("0) Exit");
+            String choice = in.nextLine();
+            switch (Integer.parseInt(choice)){
+                case 1:
+                    String value = in.nextLine();
+                    if(value.contains("+")){
+                        value = value.replace("+", "");
+                        RowNames.AddToRow(value);
+                    }
+                    else if(value.contains("-")){
+                        value = value.replace("-", "");
+                        RowNames.RemoveFromRow(value);
+                    }
+                    break;
+                case 2:
+                    RowNames.ShowRow();
+                    break;
+                case 0:
+                    run = false;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
 
@@ -52,5 +82,26 @@ class Lab5{
             arr[right++] = i;
         }
         return arr;
+    }
+}
+
+class RowNames{
+    static String row = "";
+
+    public static void AddToRow(String value){
+        row += value + " ";
+    }
+
+    public static void RemoveFromRow(String value){
+        if(row.contains(value)){
+            row = row.replace(value, "").trim();
+        }
+        else{
+            System.out.println("No such value to remove");
+        }
+    }
+
+    public static void ShowRow(){
+        System.out.println(row.trim());
     }
 }
