@@ -55,6 +55,7 @@ class Lab5{
 
         double result = Double.parseDouble(operands[0]);
         for(int i=1;i<operands.length;i++){
+            //switch and enum
             if(operators[i].equals("+"))
                 result += Integer.parseInt(operands[i]);
             else if(operators[i].equals("*"))
@@ -87,7 +88,7 @@ class Lab5{
 
 class RowNames{
     static String row = "";
-
+    //trim case
     public static void AddToRow(String value){
         row += value + " ";
     }

@@ -5,11 +5,11 @@ public class ArrayList {
     private int position;
 
     public ArrayList(){
-        array = new int[6];
-        position = 0;
+        this(6);
     }
 
     public ArrayList(int capacity){
+        //todo exeption
         if (capacity > 0){
             array = new int[capacity];
         }

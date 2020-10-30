@@ -11,6 +11,17 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> mylist = Arrays.asList("a1", "a2", "b1", "b2", "c2", "c1", "c3");
+        mylist = Task.sortList(mylist);
+
+        Task.avgArray();
+
+        String str = "sjdhgfsjkavchjwagehf";
+        Task.stringSort(str);
+    }
+}
+//todo streams
+class Task{
+    public static List<String> sortList(List<String> mylist){
         mylist.sort(Comparator.naturalOrder());
         for (int i = 0; i < mylist.size(); i++){
             if(mylist.get(i).contains("c")){
@@ -18,7 +29,10 @@ public class Main {
             }
         }
         System.out.println();
+        return mylist;
+    }
 
+    public static void avgArray(){
         Scanner input = new Scanner(System.in);
         int N = input.nextInt();
         input.close();
@@ -43,8 +57,9 @@ public class Main {
 
         System.out.println("Avg = " + sum / counter);
         System.out.println();
+    }
 
-        String str = "sjdhgfsjkavchjwagehf";
+    public static void stringSort(String str){
         Pattern pattern = Pattern.compile("[h-tH-T]", Pattern.CASE_INSENSITIVE);
         String result = "";
         for (int i = 0; i < str.length(); i++){
