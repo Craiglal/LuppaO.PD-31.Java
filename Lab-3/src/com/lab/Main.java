@@ -1,19 +1,17 @@
 package com.lab;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
         List<String> mylist = Arrays.asList("a1", "a2", "b1", "b2", "c2", "c1", "c3");
-        mylist = Task.sortList(mylist);
+        Task.sortList(mylist);
 
-        Task.avgArray();
+        Task.avgArray(10);
 
         String str = "sjdhgfsjkavchjwagehf";
         Task.stringSort(str);
@@ -21,57 +19,21 @@ public class Main {
 }
 //todo streams
 class Task{
-    public static List<String> sortList(List<String> mylist){
-        mylist.sort(Comparator.naturalOrder());
-        for (int i = 0; i < mylist.size(); i++){
-            if(mylist.get(i).contains("c")){
-                System.out.println(mylist.get(i).toUpperCase());
-            }
-        }
-        System.out.println();
-        return mylist;
+    public static void sortList(List<String> mylist){
+        mylist.stream().filter(s -> s.startsWith("c")).sorted().forEach(s -> System.out.println(s.toUpperCase()));
     }
 
-    public static void avgArray(){
-        Scanner input = new Scanner(System.in);
-        int N = input.nextInt();
-        input.close();
-
-        int[] arr = new int[N];
-        for (int i = 0; i < arr.length; i++){
-            arr[i] = (int)(Math.random() * (0 - 9 + 1) + 9);
-        }
-        for (int i = 0; i < arr.length; i++){
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-
-        double sum = 0;
-        int counter = 0;
-        for (int i = 0; i < arr.length; i++){
-            if(arr[i] % 2 == 0){
-                sum += arr[i];
-                counter++;
-            }
-        }
-
-        System.out.println("Avg = " + sum / counter);
-        System.out.println();
+    public static void avgArray(int N){
+        Integer[] arr = new Integer[N];
+        List<Integer> nums = Arrays.asList(arr);
+        Random random = new Random();
+        System.out.println(nums.stream().mapToInt(i -> random.nextInt(10)).filter(i -> i % 2 == 0).average()
+                .getAsDouble());
     }
 
     public static void stringSort(String str){
-        Pattern pattern = Pattern.compile("[h-tH-T]", Pattern.CASE_INSENSITIVE);
-        String result = "";
-        for (int i = 0; i < str.length(); i++){
-            Matcher matcher = pattern.matcher(str.substring(i,i + 1));
-            if(matcher.find()){
-                result += str.substring(i,i + 1).toUpperCase();
-            }
-            else{
-                result += str.substring(i,i + 1);
-            }
-        }
-        System.out.println(result);
-        System.out.println();
+        str = Pattern.compile("").splitAsStream(str)
+                .map(s -> (s.charAt(0) >= 'h' && s.charAt(0) <= 't') ? s.toUpperCase(): s).collect(Collectors.joining());
+        System.out.println(str);
     }
 }
